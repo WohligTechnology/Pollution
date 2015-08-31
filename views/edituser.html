@@ -1,0 +1,21 @@
+<div class="page">
+    <h2 class="title">
+</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel panel-default" style="border-radius:0px;">
+                <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Edit User
+                </div>
+                <div class="panel-body">
+                    <form name="form_constraints" class="form-validation" data-ng-submit="submitForm()">
+                        <div class='form-group'><label>Name</label><input type='text' class='form-control' ng-model = 'user.name' placeholder='Name' readonly > </div><div class='form-group'><label>Facebook ID</label><input type='text' class='form-control' ng-model = 'user.facebookid' placeholder='Facebook ID' readonly > </div><div class='form-group'><label>Twitter ID</label><input type='text' class='form-control' ng-model = 'user.twitterid' placeholder='Twitter ID' readonly > </div><div class='form-group'><label>Creation Date</label><input type='date' class='form-control' ng-model = 'user.creationdate' placeholder='Creation Date' readonly > </div><div class='form-group'><label>Modification Date</label><input type='date' class='form-control' ng-model = 'user.modificationdate' placeholder='Modification Date' readonly > </div><div class='form-group'><label>Facebook Points</label><input type='text' class='form-control' ng-model = 'user.facebookpoints' placeholder='Facebook Points' readonly > </div><div class='form-group'><label>Twitter Points</label><input type='text' class='form-control' ng-model = 'user.twitterpoints' placeholder='Twitter Points' readonly > </div><div class='form-group'><label>Total Days for End</label><input type='text' class='form-control' ng-model = 'user.totaldaysforend' placeholder='Total Days for End' readonly > </div><array objval='GalleryStructure' label='Gallery' editval='user.gallery'></array><array objval='DailyPostStructure' label='DailyPost' editval='user.dailypost'></array><array objval='PostStructure' label='Post' editval='user.post'></array><!--Add New Tags-->
+                        <div class="text-center" style="padding-bottom:20px;">
+                            <button type="submit" class="btn btn-primary all-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
