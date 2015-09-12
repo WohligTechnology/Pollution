@@ -1,5 +1,7 @@
-var adminurl = "http://localhost:1337/";
-//var adminurl = "http://104.197.23.70/";
+//var adminurl = "http://localhost:1337/";
+//var adminurl = "http://timesbappa.com:1337/";
+var adminurl = "http://timesbappa.com/";
+//var adminurl = "http://104.197.95.70/";
 //var adminurl = "http://192.168.2.22:1337/";
 var adminlogin = {
     "username": "admin@admin.com",
@@ -60,9 +62,9 @@ var navigationservice = angular.module('navigationservice', [])
                 }
             }).success(callback);
         },
-        //    countUser: function(callback) {
-        //      $http.get(adminurl + "user/countusers").success(callback);
-        //    },
+        countUser: function (callback) {
+            $http.get(adminurl + "user/countusers").success(callback);
+        },
         setUser: function (data) {
             $.jStorage.set("user", data);
         },

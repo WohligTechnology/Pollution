@@ -5,7 +5,7 @@ var phonecatControllers = angular.module('phonecatControllers', ['templateservic
 window.uploadUrl = 'http://104.197.23.70/user/uploadfile';
 //window.uploadUrl = 'http://192.168.2.22:1337/user/uploadfile';
 //window.uploadUrl = 'http://localhost:1337/user/uploadfile';
-phonecatControllers.controller('home', function($scope, TemplateService, NavigationService, $routeParams, $location) {
+phonecatControllers.controller('home', function ($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Dashboard");
     TemplateService.title = $scope.menutitle;
@@ -13,11 +13,11 @@ phonecatControllers.controller('home', function($scope, TemplateService, Navigat
     TemplateService.content = "views/dashboard.html";
     TemplateService.list = 1;
     $scope.navigation = NavigationService.getnav();
-    //  NavigationService.countUser(function(data, status) {
-    //    $scope.user = data;
-    //  });
+    NavigationService.countUser(function (data, status) {
+        $scope.user = data;
+    });
 });
-phonecatControllers.controller('login', function($scope, TemplateService, NavigationService, $routeParams, $location) {
+phonecatControllers.controller('login', function ($scope, TemplateService, NavigationService, $routeParams, $location) {
     $scope.template = TemplateService;
     TemplateService.content = "views/login.html";
     TemplateService.list = 3;
@@ -26,10 +26,10 @@ phonecatControllers.controller('login', function($scope, TemplateService, Naviga
     $.jStorage.flush();
     $scope.isValidLogin = 1;
     $scope.login = {};
-    $scope.verifylogin = function() {
+    $scope.verifylogin = function () {
         console.log($scope.login);
         if ($scope.login.email && $scope.login.password) {
-            NavigationService.adminLogin($scope.login, function(data, status) {
+            NavigationService.adminLogin($scope.login, function (data, status) {
                 if (data.value == "false") {
                     $scope.isValidLogin = 0;
                 } else {
@@ -45,7 +45,7 @@ phonecatControllers.controller('login', function($scope, TemplateService, Naviga
 
     }
 });
-phonecatControllers.controller('headerctrl', function($scope, TemplateService, $location, $routeParams, NavigationService) {
+phonecatControllers.controller('headerctrl', function ($scope, TemplateService, $location, $routeParams, NavigationService) {
     $scope.template = TemplateService;
     //  if (!$.jStorage.get("adminuser")) {
     //    $location.url("/login");
@@ -53,7 +53,7 @@ phonecatControllers.controller('headerctrl', function($scope, TemplateService, $
     //  }
 });
 
-phonecatControllers.controller('createorder', function($scope, TemplateService, NavigationService, ngDialog, $routeParams, $location) {
+phonecatControllers.controller('createorder', function ($scope, TemplateService, NavigationService, ngDialog, $routeParams, $location) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive("Orders");
     TemplateService.title = $scope.menutitle;
@@ -64,9 +64,9 @@ phonecatControllers.controller('createorder', function($scope, TemplateService, 
 
     $scope.order = {};
 
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
         console.log($scope.order);
-        NavigationService.saveOrder($scope.order, function(data, status) {
+        NavigationService.saveOrder($scope.order, function (data, status) {
             console.log(data);
             $location.url("/order");
         });
@@ -74,16 +74,16 @@ phonecatControllers.controller('createorder', function($scope, TemplateService, 
 
 
     $scope.order.tag = [];
-    $scope.ismatch = function(data, select) {
+    $scope.ismatch = function (data, select) {
         abc.select = select;
-        _.each(data, function(n, key) {
+        _.each(data, function (n, key) {
             if (typeof n == 'string') {
                 var item = {
                     _id: _.now(),
                     name: _.capitalize(n),
                     category: $scope.artwork.type
                 };
-                NavigationService.saveTag(item, function(data, status) {
+                NavigationService.saveTag(item, function (data, status) {
                     if (data.value == true) {
                         item._id = data.id;
                     }
@@ -97,10 +97,10 @@ phonecatControllers.controller('createorder', function($scope, TemplateService, 
     }
 
 
-    $scope.refreshOrder = function(search) {
+    $scope.refreshOrder = function (search) {
         $scope.tag = [];
         if (search) {
-            NavigationService.findArtMedium(search, $scope.order.tag, function(data, status) {
+            NavigationService.findArtMedium(search, $scope.order.tag, function (data, status) {
                 $scope.tag = data;
             });
         }
@@ -144,7 +144,7 @@ phonecatControllers.controller('createorder', function($scope, TemplateService, 
         "name": "first option"
     }];
 
-    NavigationService.getUser(function(data, status) {
+    NavigationService.getUser(function (data, status) {
         $scope.persons = data;
     });
 
@@ -153,7 +153,7 @@ phonecatControllers.controller('createorder', function($scope, TemplateService, 
 
 
 
-phonecatControllers.controller('UserCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('UserCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('User');
     TemplateService.title = $scope.menutitle;
@@ -164,13 +164,19 @@ phonecatControllers.controller('UserCtrl', function($scope, TemplateService, Nav
     $scope.User = [];
     $scope.pagedata = {};
     $scope.pagedata.page = 1;
-    $scope.pagedata.limit = '20';
+    $scope.pagedata.limit = '100';
     $scope.pagedata.search = '';
     $scope.number = 100;
-    $scope.reload = function(pagedata) {
+    $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
-        NavigationService.findLimitedUser($scope.pagedata, function(data, status) {
+        NavigationService.findLimitedUser($scope.pagedata, function (data, status) {
+            _.each(data.data, function (n) {
+                var timestamp = n._id.toString().substring(0, 8);
+                var createdate = new Date(parseInt(timestamp, 16) * 1000);
+                n.createdate = createdate;
+            });
             $scope.user = data;
+            console.log($scope.user);
             $scope.pages = [];
             var newclass = '';
             for (var i = 1; i <= data.totalpages; i++) {
@@ -187,13 +193,13 @@ phonecatControllers.controller('UserCtrl', function($scope, TemplateService, Nav
         });
     }
     $scope.reload($scope.pagedata);
-    $scope.confDelete = function() {
-        NavigationService.deleteUser(function(data, status) {
+    $scope.confDelete = function () {
+        NavigationService.deleteUser(function (data, status) {
             ngDialog.close();
             window.location.reload();
         });
     }
-    $scope.deletefun = function(id) {
+    $scope.deletefun = function (id) {
         $.jStorage.set('deleteuser', id);
         ngDialog.open({
             template: 'views/delete.html',
@@ -203,7 +209,7 @@ phonecatControllers.controller('UserCtrl', function($scope, TemplateService, Nav
         });
     }
 });
-phonecatControllers.controller('createUserCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('createUserCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('User');
     TemplateService.title = $scope.menutitle;
@@ -212,8 +218,8 @@ phonecatControllers.controller('createUserCtrl', function($scope, TemplateServic
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.user = {};
-    $scope.submitForm = function() {
-        NavigationService.saveUser($scope.user, function(data, status) {
+    $scope.submitForm = function () {
+        NavigationService.saveUser($scope.user, function (data, status) {
             $location.url('/user');
         });
     };
@@ -284,7 +290,7 @@ phonecatControllers.controller('createUserCtrl', function($scope, TemplateServic
         "type": "text"
     }];
 });
-phonecatControllers.controller('editUserCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('editUserCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('User');
     TemplateService.title = $scope.menutitle;
@@ -293,8 +299,9 @@ phonecatControllers.controller('editUserCtrl', function($scope, TemplateService,
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.user = {};
-    NavigationService.getOneUser($routeParams.id, function(data, status) {
+    NavigationService.getOneUser($routeParams.id, function (data, status) {
         $scope.user = data;
+        console.log($scope.user);
         if (!$scope.user.gallery) {
             $scope.user.gallery = [];
         }
@@ -305,17 +312,18 @@ phonecatControllers.controller('editUserCtrl', function($scope, TemplateService,
             $scope.user.post = [];
         }
     });
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
         $scope.user._id = $routeParams.id;
-        NavigationService.saveUser($scope.user, function(data, status) {
+        NavigationService.saveUser($scope.user, function (data, status) {
             $location.url('/user');
         });
     };
+
     $scope.GalleryStructure = [{
-        "name": "Id",
+        "name": "_id",
         "type": "text"
     }, {
-        "name": "FinalImage",
+        "name": "imagefinal",
         "type": "text"
     }, {
         "name": "FacebookPostid",
@@ -324,6 +332,7 @@ phonecatControllers.controller('editUserCtrl', function($scope, TemplateService,
         "name": "TwitterPostid",
         "type": "text"
     }];
+
     $scope.DailyPostStructure = [{
         "name": "PostId",
         "type": "text"
@@ -375,7 +384,7 @@ phonecatControllers.controller('editUserCtrl', function($scope, TemplateService,
         "type": "text"
     }];
 });
-phonecatControllers.controller('ImagesCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('ImagesCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Images');
     TemplateService.title = $scope.menutitle;
@@ -389,9 +398,9 @@ phonecatControllers.controller('ImagesCtrl', function($scope, TemplateService, N
     $scope.pagedata.limit = '20';
     $scope.pagedata.search = '';
     $scope.number = 100;
-    $scope.reload = function(pagedata) {
+    $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
-        NavigationService.findLimitedImages($scope.pagedata, function(data, status) {
+        NavigationService.findLimitedImages($scope.pagedata, function (data, status) {
             $scope.images = data;
             $scope.pages = [];
             var newclass = '';
@@ -409,13 +418,13 @@ phonecatControllers.controller('ImagesCtrl', function($scope, TemplateService, N
         });
     }
     $scope.reload($scope.pagedata);
-    $scope.confDelete = function() {
-        NavigationService.deleteImages(function(data, status) {
+    $scope.confDelete = function () {
+        NavigationService.deleteImages(function (data, status) {
             ngDialog.close();
             window.location.reload();
         });
     }
-    $scope.deletefun = function(id) {
+    $scope.deletefun = function (id) {
         $.jStorage.set('deleteimages', id);
         ngDialog.open({
             template: 'views/delete.html',
@@ -425,7 +434,7 @@ phonecatControllers.controller('ImagesCtrl', function($scope, TemplateService, N
         });
     }
 });
-phonecatControllers.controller('createImagesCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('createImagesCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Images');
     TemplateService.title = $scope.menutitle;
@@ -434,13 +443,13 @@ phonecatControllers.controller('createImagesCtrl', function($scope, TemplateServ
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.images = {};
-    $scope.submitForm = function() {
-        NavigationService.saveImages($scope.images, function(data, status) {
+    $scope.submitForm = function () {
+        NavigationService.saveImages($scope.images, function (data, status) {
             $location.url('/images');
         });
     };
 });
-phonecatControllers.controller('editImagesCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('editImagesCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Images');
     TemplateService.title = $scope.menutitle;
@@ -449,17 +458,17 @@ phonecatControllers.controller('editImagesCtrl', function($scope, TemplateServic
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.images = {};
-    NavigationService.getOneImages($routeParams.id, function(data, status) {
+    NavigationService.getOneImages($routeParams.id, function (data, status) {
         $scope.images = data;
     });
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
         $scope.images._id = $routeParams.id;
-        NavigationService.saveImages($scope.images, function(data, status) {
+        NavigationService.saveImages($scope.images, function (data, status) {
             $location.url('/images');
         });
     };
 });
-phonecatControllers.controller('ImageTypeCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('ImageTypeCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('ImageType');
     TemplateService.title = $scope.menutitle;
@@ -473,9 +482,9 @@ phonecatControllers.controller('ImageTypeCtrl', function($scope, TemplateService
     $scope.pagedata.limit = '20';
     $scope.pagedata.search = '';
     $scope.number = 100;
-    $scope.reload = function(pagedata) {
+    $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
-        NavigationService.findLimitedImageType($scope.pagedata, function(data, status) {
+        NavigationService.findLimitedImageType($scope.pagedata, function (data, status) {
             $scope.imagetype = data;
             $scope.pages = [];
             var newclass = '';
@@ -493,13 +502,13 @@ phonecatControllers.controller('ImageTypeCtrl', function($scope, TemplateService
         });
     }
     $scope.reload($scope.pagedata);
-    $scope.confDelete = function() {
-        NavigationService.deleteImageType(function(data, status) {
+    $scope.confDelete = function () {
+        NavigationService.deleteImageType(function (data, status) {
             ngDialog.close();
             window.location.reload();
         });
     }
-    $scope.deletefun = function(id) {
+    $scope.deletefun = function (id) {
         $.jStorage.set('deleteimagetype', id);
         ngDialog.open({
             template: 'views/delete.html',
@@ -509,7 +518,7 @@ phonecatControllers.controller('ImageTypeCtrl', function($scope, TemplateService
         });
     }
 });
-phonecatControllers.controller('createImageTypeCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('createImageTypeCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('ImageType');
     TemplateService.title = $scope.menutitle;
@@ -518,13 +527,13 @@ phonecatControllers.controller('createImageTypeCtrl', function($scope, TemplateS
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.imagetype = {};
-    $scope.submitForm = function() {
-        NavigationService.saveImageType($scope.imagetype, function(data, status) {
+    $scope.submitForm = function () {
+        NavigationService.saveImageType($scope.imagetype, function (data, status) {
             $location.url('/imagetype');
         });
     };
 });
-phonecatControllers.controller('editImageTypeCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('editImageTypeCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('ImageType');
     TemplateService.title = $scope.menutitle;
@@ -533,17 +542,17 @@ phonecatControllers.controller('editImageTypeCtrl', function($scope, TemplateSer
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.imagetype = {};
-    NavigationService.getOneImageType($routeParams.id, function(data, status) {
+    NavigationService.getOneImageType($routeParams.id, function (data, status) {
         $scope.imagetype = data;
     });
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
         $scope.imagetype._id = $routeParams.id;
-        NavigationService.saveImageType($scope.imagetype, function(data, status) {
+        NavigationService.saveImageType($scope.imagetype, function (data, status) {
             $location.url('/imagetype');
         });
     };
 });
-phonecatControllers.controller('ResultCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('ResultCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Result');
     TemplateService.title = $scope.menutitle;
@@ -557,9 +566,9 @@ phonecatControllers.controller('ResultCtrl', function($scope, TemplateService, N
     $scope.pagedata.limit = '20';
     $scope.pagedata.search = '';
     $scope.number = 100;
-    $scope.reload = function(pagedata) {
+    $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
-        NavigationService.findLimitedResult($scope.pagedata, function(data, status) {
+        NavigationService.findLimitedResult($scope.pagedata, function (data, status) {
             $scope.result = data;
             $scope.pages = [];
             var newclass = '';
@@ -577,13 +586,13 @@ phonecatControllers.controller('ResultCtrl', function($scope, TemplateService, N
         });
     }
     $scope.reload($scope.pagedata);
-    $scope.confDelete = function() {
-        NavigationService.deleteResult(function(data, status) {
+    $scope.confDelete = function () {
+        NavigationService.deleteResult(function (data, status) {
             ngDialog.close();
             window.location.reload();
         });
     }
-    $scope.deletefun = function(id) {
+    $scope.deletefun = function (id) {
         $.jStorage.set('deleteresult', id);
         ngDialog.open({
             template: 'views/delete.html',
@@ -593,7 +602,7 @@ phonecatControllers.controller('ResultCtrl', function($scope, TemplateService, N
         });
     }
 });
-phonecatControllers.controller('createResultCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('createResultCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Result');
     TemplateService.title = $scope.menutitle;
@@ -602,8 +611,8 @@ phonecatControllers.controller('createResultCtrl', function($scope, TemplateServ
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.result = {};
-    $scope.submitForm = function() {
-        NavigationService.saveResult($scope.result, function(data, status) {
+    $scope.submitForm = function () {
+        NavigationService.saveResult($scope.result, function (data, status) {
             $location.url('/result');
         });
     };
@@ -619,7 +628,7 @@ phonecatControllers.controller('createResultCtrl', function($scope, TemplateServ
         "type": "text"
     }];
 });
-phonecatControllers.controller('editResultCtrl', function($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('editResultCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Result');
     TemplateService.title = $scope.menutitle;
@@ -628,15 +637,15 @@ phonecatControllers.controller('editResultCtrl', function($scope, TemplateServic
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.result = {};
-    NavigationService.getOneResult($routeParams.id, function(data, status) {
+    NavigationService.getOneResult($routeParams.id, function (data, status) {
         $scope.result = data;
         if (!$scope.result.standings) {
             $scope.result.standings = [];
         }
     });
-    $scope.submitForm = function() {
+    $scope.submitForm = function () {
         $scope.result._id = $routeParams.id;
-        NavigationService.saveResult($scope.result, function(data, status) {
+        NavigationService.saveResult($scope.result, function (data, status) {
             $location.url('/result');
         });
     };
