@@ -11,10 +11,14 @@ phonecatControllers.controller('home', function ($scope, TemplateService, Naviga
     TemplateService.title = $scope.menutitle;
     TemplateService.submenu = "";
     TemplateService.content = "views/dashboard.html";
-    TemplateService.list = 1;
+    TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     NavigationService.countUser(function (data, status) {
         $scope.user = data;
+    });
+    NavigationService.counter(function (data, status) {
+        console.log(data);
+        $scope.count = data;
     });
 });
 phonecatControllers.controller('login', function ($scope, TemplateService, NavigationService, $routeParams, $location) {
@@ -29,15 +33,22 @@ phonecatControllers.controller('login', function ($scope, TemplateService, Navig
     $scope.verifylogin = function () {
         console.log($scope.login);
         if ($scope.login.email && $scope.login.password) {
-            NavigationService.adminLogin($scope.login, function (data, status) {
-                if (data.value == "false") {
-                    $scope.isValidLogin = 0;
-                } else {
-                    $scope.isValidLogin = 1;
-                    $.jStorage.set("adminuser", data);
-                    $location.url("/home");
-                }
-            })
+            //            NavigationService.adminLogin($scope.login, function (data, status) {
+            //                if (data.value == "false") {
+            //                    $scope.isValidLogin = 0;
+            //                } else {
+            //                    $scope.isValidLogin = 1;
+            //                    $.jStorage.set("adminuser", data);
+            //                    $location.url("/home");
+            //                }
+            //            })
+            if ($scope.login.email === adminlogin.username && $scope.login.password === adminlogin.password) {
+                $scope.isValidLogin = 1;
+                $.jStorage.set("adminuser", adminlogin);
+                $location.url("/home");
+            } else {
+                $scope.isValidLogin = 0;
+            }
         } else {
             console.log("blank login");
             $scope.isValidLogin = 0;
@@ -47,10 +58,10 @@ phonecatControllers.controller('login', function ($scope, TemplateService, Navig
 });
 phonecatControllers.controller('headerctrl', function ($scope, TemplateService, $location, $routeParams, NavigationService) {
     $scope.template = TemplateService;
-    //  if (!$.jStorage.get("adminuser")) {
-    //    $location.url("/login");
+    //    if (!$.jStorage.get("adminuser")) {
+    //        $location.url("/login");
     //
-    //  }
+    //    }
 });
 
 phonecatControllers.controller('createorder', function ($scope, TemplateService, NavigationService, ngDialog, $routeParams, $location) {
@@ -158,13 +169,13 @@ phonecatControllers.controller('UserCtrl', function ($scope, TemplateService, Na
     $scope.menutitle = NavigationService.makeactive('User');
     TemplateService.title = $scope.menutitle;
     TemplateService.submenu = '';
-    TemplateService.content = 'views/User.html';
+    TemplateService.content = 'views/user.html';
     TemplateService.list = 2;
     $scope.navigation = NavigationService.getnav();
     $scope.User = [];
     $scope.pagedata = {};
     $scope.pagedata.page = 1;
-    $scope.pagedata.limit = '100';
+    $scope.pagedata.limit = '20';
     $scope.pagedata.search = '';
     $scope.number = 100;
     $scope.reload = function (pagedata) {
@@ -174,6 +185,12 @@ phonecatControllers.controller('UserCtrl', function ($scope, TemplateService, Na
                 var timestamp = n._id.toString().substring(0, 8);
                 var createdate = new Date(parseInt(timestamp, 16) * 1000);
                 n.createdate = createdate;
+                if (n.gallery && n.gallery.length > 0) {
+                    n.lastgallery = n.gallery[n.gallery.length - 1];
+                }
+                if (n.post && n.post.length > 0) {
+                    n.lastpost = n.post[n.post.length - 1];
+                }
             });
             $scope.user = data;
             console.log($scope.user);
@@ -659,4 +676,80 @@ phonecatControllers.controller('editResultCtrl', function ($scope, TemplateServi
         "name": "Points",
         "type": "text"
     }];
+});
+phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('Leaderboard');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/leaderboard.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.leaderboard = {};
+    $scope.pagedata = {};
+    $scope.pagedata.page = 1;
+    $scope.pagedata.limit = '20';
+    $scope.pagedata.city = 'Mumbai';
+    $scope.pagedata.date = '17-09-2015';
+
+    $scope.reload = function (pagedata) {
+        $scope.pagedata = pagedata;
+        console.log($scope.pagedata);
+        if ($scope.pagedata.date == "ThreeDays" || $scope.pagedata.date == "FiveDays" || $scope.pagedata.date == "TenDays") {
+            $scope.pagedata.type = $scope.pagedata.date;
+            delete $scope.pagedata.date;
+        }
+        NavigationService.getleaderboards($scope.pagedata, function (data, status) {
+            console.log(data);
+            if (data.value != false)
+                $scope.leaderboard = data;
+        });
+    }
+
+    $scope.reload($scope.pagedata);
+
+    $scope.datejson = [{
+        name: "17-09-2015",
+        value: "17-09-2015"
+    }, {
+        name: "18-09-2015",
+        value: "18-09-2015"
+    }, {
+        name: "19-09-2015",
+        value: "19-09-2015"
+    }, {
+        name: "20-09-2015",
+        value: "20-09-2015"
+    }, {
+        name: "21-09-2015",
+        value: "21-09-2015"
+    }, {
+        name: "22-09-2015",
+        value: "22-09-2015"
+    }, {
+        name: "23-09-2015",
+        value: "23-09-2015"
+    }, {
+        name: "24-09-2015",
+        value: "24-09-2015"
+    }, {
+        name: "25-09-2015",
+        value: "25-09-2015"
+    }, {
+        name: "26-09-2015",
+        value: "26-09-2015"
+    }, {
+        name: "27-09-2015",
+        value: "27-09-2015"
+    }, {
+        name: "3 Days",
+        value: "ThreeDays"
+    }, {
+        name: "5 Days",
+        value: "FiveDays"
+    }, {
+        name: "10 Days",
+        value: "TenDays"
+    }];
+
 }); //Add New Controller

@@ -9,37 +9,104 @@
                     <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>{{menutitle}}
                     </div>
                     <div class="panel-body">
-                        <div class="col-md-4">
-                            <div class="box">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="icon"><span class="glyphicon glyphicon-sunglasses"></span>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon glyphicon-user"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{user}}</h3>
+                                                <p class="text-center">Total Users</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="text">
-                                            <h3 class="text-center">{{user}}</h3>
-                                            <p class="text-center">Total Users</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon glyphicon-thumbs-up"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{count.like}}</h3>
+                                                <p class="text-center">Total Likes</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon fa fa-share-alt"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{count.share}}</h3>
+                                                <p class="text-center">Total Shares</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="box">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="icon"><span class="glyphicon glyphicon-envelope"></span>
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon glyphicon-retweet"></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="text">
-                                            <h3 class="text-center">{{artwork}}</h3>
-                                            <p class="text-center">Total Artwork</p>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{count.retweet}}</h3>
+                                                <p class="text-center">Total Retweets</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon glyphicon-star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{count.favorite}}</h3>
+                                                <p class="text-center">Total Favourites</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="icon"><span class="glyphicon fa fa-plus"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div class="text">
+                                                <h3 class="text-center">{{count.total}}</h3>
+                                                <p class="text-center">Total Interactions</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

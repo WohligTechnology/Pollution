@@ -1,11 +1,12 @@
 //var adminurl = "http://localhost:1337/";
 //var adminurl = "http://timesbappa.com:1337/";
 var adminurl = "http://timesbappa.com/";
+//var adminurl = "http://192.168.2.5/";
 //var adminurl = "http://104.197.95.70/";
-//var adminurl = "http://192.168.2.22:1337/";
+//var adminurl = "http://192.168.2.22/";
 var adminlogin = {
-    "username": "admin@admin.com",
-    "password": "admin123"
+    "username": "wohlig@wohlig.com",
+    "password": "wohlig123"
 };
 var navigationservice = angular.module('navigationservice', [])
 
@@ -21,21 +22,28 @@ var navigationservice = angular.module('navigationservice', [])
             link: '#/user',
             subnav: []
         }, {
-            name: 'Images',
+            name: 'Leaderboard',
             active: '',
-            link: '#/images',
+            link: '#/leaderboard',
             subnav: []
-        }, {
-            name: 'ImageType',
-            active: '',
-            link: '#/imagetype',
-            subnav: []
-        }, {
-            name: 'Result',
-            active: '',
-            link: '#/result',
-            subnav: []
-        }, //Add New Left
+        }
+//        {
+//            name: 'Images',
+//            active: '',
+//            link: '#/images',
+//            subnav: []
+//        }, {
+//            name: 'ImageType',
+//            active: '',
+//            link: '#/imagetype',
+//            subnav: []
+//        }, {
+//            name: 'Result',
+//            active: '',
+//            link: '#/result',
+//            subnav: []
+//        }, 
+                      //Add New Left
     ];
 
     return {
@@ -214,7 +222,21 @@ var navigationservice = angular.module('navigationservice', [])
                 method: 'POST',
                 data: data
             }).success(callback);
-        }, //Add New Service
+        },
+        counter: function (callback) {
+            $http({
+                url: adminurl + 'user/counter',
+                method: 'POST'
+            }).success(callback);
+        },
+        getleaderboards: function (data, callback) {
+                $http({
+                    url: adminurl + 'dailypost/find',
+                    method: 'POST',
+                    data: data
+                }).success(callback);
+            }
+            //Add New Service
 
     }
 })

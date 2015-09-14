@@ -59,10 +59,13 @@ firstapp.config(
             }).when('/editresult/:id', {
                 templateUrl: 'views/template.html',
                 controller: 'editResultCtrl'
+            }).when('/leaderboard', {
+                templateUrl: 'views/template.html',
+                controller: 'leaderboardCtrl'
             }). //Add New Path
 
         otherwise({
-            redirectTo: '/login'
+            redirectTo: '/home'
         });
     });
 firstapp.filter('uploadpath', function () {

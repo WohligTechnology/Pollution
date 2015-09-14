@@ -1,0 +1,64 @@
+<div>
+    <h2 class="title">
+</h2>
+    <div class="page">
+
+        <div class="row">
+            <div class="col-md-12">
+                <section class="panel panel-default" style="border-radius:0px;">
+                    <div class="panel-heading panel-hdr"><span class="glyphicon glyphicon-th mr5"></span>Show Leaderboard
+                    </div>
+                    <div class="panel-body">
+                        <div class="bot search-box">
+                            <select ng-model="pagedata.city" class="form-control on-left" ng-change="reload(pagedata);">
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Pune">Pune</option>
+                            </select>
+                            <select ng-options="date.value as date.name for date in datejson" ng-model="pagedata.date" class="form-control on-leftspace" ng-change="reload(pagedata);">
+                                <!--                                <option ng-repeat="date in datejson" value="{{date.value}}" selected>{{date.name}}</option>-->
+                            </select>
+                            <div class="pull-right">
+                                <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:1,limit:pagedata.limit,city:pagedata.city,date:pagedata.date})">
+                                    <option value="20" selected>20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr class="bg-dark">
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Profile Pic</th>
+                                        <th class="text-center">Total Likes</th>
+                                        <th class="text-center">Total Shares</th>
+                                        <th class="text-center">Total Retweets</th>
+                                        <th class="text-center">Total Favourites</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="value in leaderboard">
+                                        <td class="text-center">{{value.leaderboard.name}}</td>
+                                        <td class="text-center"><img ng-src="{{value.leaderboard.profilepic}}" ng-if="value.leaderboard.profilepic"></td>
+                                        <td class="text-center">{{value.leaderboard.like}}</td>
+                                        <td class="text-center">{{value.leaderboard.share}}</td>
+                                        <td class="text-center">{{value.leaderboard.retweet}}</td>
+                                        <td class="text-center">{{value.leaderboard.favorite}}</td>
+                                        <td class="text-center">{{value.leaderboard.total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav>
+                                <ul class="pagination">
+                                    <li ng-class="page.class" ng-repeat="page in pages"><a ng-click="reload({page:page.pageno,limit:pagedata.limit,city:pagedata.city,date:pagedata.date});">{{page.pageno}}</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                </section>
+                </div>
+            </div>
+        </div>
+    </div>

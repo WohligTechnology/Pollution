@@ -1,13 +1,16 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,100italic,300italic,400italic);
- body {
+body {
     font-family: 'Lato', sans-serif;
 }
+
 a {
     color: #FF6427;
 }
+
 a:hover {
     color: #FF6427;
 }
+
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:hover,
 .nav-pills>li.active>a:focus {
@@ -19,6 +22,7 @@ a:hover {
     border-radius: 0px;
     color: #FF6427;
 }
+
 h1,
 h2,
 h3,
@@ -27,10 +31,12 @@ h5,
 h6 {
     margin-top: 0px;
 }
+
 p {
     line-height: 180%;
     font-weight: 300;
 }
+
 .repeated-item.ng-enter,
 .repeated-item.ng-move {
     -webkit-animation: 0.5s rollIn;
@@ -38,6 +44,8 @@ p {
     -o-animation: 0.5s rollIn;
     animation: 0.5s rollIn;
 }
+
+
 /*
  The ng-enter-active and ng-move-active
  are where the transition destination properties
@@ -49,6 +57,8 @@ p {
 .repeated-item.ng-move.ng-move-active {
     opacity: 1;
 }
+
+
 /*
   We're using CSS keyframe animations for when
   the leave event is triggered for the element
@@ -62,39 +72,49 @@ p {
     animation: 1s hinge;
     position: absolute;
 }
+
 ul.socialicons {
     list-style: none;
     margin-top: -8px;
 }
+
 ul.socialicons li {
     float: left;
 }
+
 ul.socialicons li i {
     float: left;
     font-size: 25px;
     padding: 5px;
     color: #C44639;
 }
+
 ul.socialicons li i:hover {
     float: left;
     font-size: 25px;
     padding: 5px;
     color: #9C3D34;
 }
+
 .logo img {
     height: 42px;
     margin-top: 3px;
 }
+
 .img {
     width: 100%;
 }
-.template {} .template.headermenu {
+
+.template {}
+
+.template.headermenu {
     background: #E9E7E7;
     padding: 5px;
     height: 30px;
     font-size: 12px;
     color: #444;
 }
+
 .template.menu {
     /* background: #FF6427; */
     padding: 3px;
@@ -102,54 +122,68 @@ ul.socialicons li i:hover {
     color: #444;
     margin-top: 10px;
 }
+
 .template.footermenu {
     background: #E9E7E7;
     padding: 10px;
     color: #444;
 }
-.template.content {} .template.footer {
+
+.template.content {}
+
+.template.footer {
     /* background: #5C5B5B; */
     padding: 0;
     color: #fff;
     margin-top: 10px;
     font-size: 12px;
 }
+
 .template.footermenu ul {
     list-style: none;
     padding: 0px;
 }
+
 .template.footermenu ul li a {
     color: #444;
 }
+
 .template.footer a {
     color: #eee;
 }
+
 .templatemain.header {
     background-color: #FFFFFF;
     /*    border-bottom: 3px solid #FF6427;*/
 }
+
 .templatemain.maincontent {
     /* background-color: #F6F6F6; */
     /* border-bottom: 3px solid #FF6427; */
 }
+
 .templatemain.menu {
     background-color: #FF6427;
     border-right: 3px solid #fff;
     min-height: 510px;
 }
+
 .templatemain.footer {
     background-color: #FF6427;
 }
+
 .menu a {
     color: white;
     font-weight: 300;
 }
+
 .menu .list-group-item {
     color: white;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #fff;
 }
+
 .nav>li>a:hover,
 .nav>li>a:focus {
     text-decoration: none;
@@ -159,19 +193,23 @@ ul.socialicons li i:hover {
     border-radius: 0px;
     color: #FF6427;
 }
+
 a.logo {
     color: #FF6427;
     font-size: 30px;
     font-weight: 300;
 }
+
 a.logo:hover {
     color: #FF6427;
     text-decoration: none;
 }
+
 .templatemain.footer {
     background-color: #FF6427;
     /*    border-top: 3px solid #fff;*/
 }
+
 body {
     font-family: "Lato";
     font-size: 14px;
@@ -179,13 +217,16 @@ body {
     color: rgb(141, 141, 141);
     background-color: #fff;
 }
+
 .create-btn {
     padding: 6px 12px;
     margin-bottom: 3px;
 }
+
 .mr5 {
     margin-right: 5px;
 }
+
 .logout {
     padding: 9px 32px;
     font-weight: 300;
@@ -198,11 +239,13 @@ body {
     margin-top: 10px;
     -webkit-transition: all 1s;
 }
+
 .logout:hover {
     color: white;
     background-color: #FF6427;
     border-color: #fff;
 }
+
 .all-btn {
     background-color: #fff;
     -webkit-border-radius: 0;
@@ -212,12 +255,14 @@ body {
     border: 1px solid #FF6427;
     -webkit-transition: all 1s;
 }
+
 .all-btn:hover {
     color: #fff;
     background-color: #FF6427;
     border: 1px solid #FF6427;
     /* -webkit-transition: all 1s; */
 }
+
 .all-btn:active,
 .all-btn:focus {
     background-color: #FF6427;
@@ -226,33 +271,40 @@ body {
     border: 1px solid #FF6427;
     outline: none;
 }
+
 .panel-default>.panel-hdr {
     color: #fff;
     background-color: #FF6427;
     border-color: #FF6427;
 }
+
 .search-box input[type=search] {
     padding: 6px 5px;
     border: 1px solid #FF6427;
 }
+
 .search-box input[type=search]:focus {
     outline: none;
 }
+
 .all-btn .badge {
     color: #fff;
     background-color: #FF6427;
     border: 1px solid #FF6427;
 }
+
 .all-btn:hover .badge {
     color: #FF6427;
     background-color: #fff;
     border: 1px solid #fff;
 }
+
 .box {
     padding: 0;
     border: 1px solid #FF6427;
     color: #FF6427;
 }
+
 .box .icon {
     background: #FF6427;
     font-size: 41px;
@@ -260,27 +312,33 @@ body {
     text-align: center;
     padding: 40px 0;
 }
+
 .box .text {
     padding: 10px;
 }
+
 .box h3 {
     font-size: 50px;
     font-weight: 100;
     text-align: center;
 }
+
 .box p {
     text-align: center;
     font-weight: 500;
     text-align: center;
 }
+
 .panel-default {
     border-color: #FF6427;
 }
+
 .table>thead>tr>th {
     vertical-align: bottom;
     border-bottom: 2px solid #ddd;
     color: #444;
 }
+
 .table-bordered>thead>tr>th,
 .table-bordered>tbody>tr>th,
 .table-bordered>tfoot>tr>th,
@@ -289,34 +347,42 @@ body {
 .table-bordered>tfoot>tr>td {
     border: 1px solid #999;
 }
+
 .table-bordered {
     border: 1px solid #999;
 }
+
 label {
     color: #444;
 }
+
 .page-signin .logo {
     font-size: 46px;
     font-weight: 400;
 }
+
 .page-signin .signin-header {
     padding: 25px 0;
     background-color: #dfe0e6;
 }
+
 .page-signin .signin-body {
     border-top: 1px solid #C2C2C2;
     padding: 70px 10px;
 }
+
 .page-signin .form-container {
     max-width: 420px;
     margin: 10px auto;
 }
+
 .btn-icon-sm {
     height: 30px;
     width: 30px;
     line-height: 30px;
     margin-right: 8px;
 }
+
 .btn-icon {
     display: inline-block;
     text-align: center;
@@ -324,24 +390,30 @@ label {
     -moz-border-radius: 0;
     border-radius: 0;
 }
+
 .bg-twitter {
     background-color: #00c7f7;
     color: #ffffff;
 }
+
 .btn-icon:hover {
     color: #ffffff;
 }
+
 .bg-facebook {
     background-color: #335397;
     color: #ffffff;
 }
+
 .bg-google-plus {
     background-color: #df4a32;
     color: #ffffff;
 }
+
 a.btn-icon.btn-icon-sm i {
     line-height: 2;
 }
+
 .page-signin .line-thru,
 .page-signup .line-thru {
     margin: 1em 0;
@@ -354,6 +426,7 @@ a.btn-icon.btn-icon-sm i {
     width: 100%;
     z-index: 1;
 }
+
 .page-signin .line-thru:before,
 .page-signup .line-thru:before {
     width: 50px;
@@ -366,6 +439,7 @@ a.btn-icon.btn-icon-sm i {
     top: 50%;
     z-index: -1;
 }
+
 .page-signin .line-thru:after,
 .page-signup .line-thru:after {
     width: 100%;
@@ -376,10 +450,12 @@ a.btn-icon.btn-icon-sm i {
     top: 49%;
     z-index: -2;
 }
+
 .page-signin .logo a:hover,
 .page-signup .logo a:hover {
     text-decoration: none;
 }
+
 .input-group {
     position: relative;
     display: table;
@@ -387,64 +463,79 @@ a.btn-icon.btn-icon-sm i {
     font-family: 'lato';
     font-weight: 300;
 }
+
 p.text-center a:hover {
     text-decoration: none;
 }
+
 a.btn-icon.btn-icon-sm.bg-twitter {
     border-radius: 100%;
     height: 32px;
     width: 32px;
     padding: 3px;
 }
+
 a.btn-icon.btn-icon-sm.bg-facebook {
     border-radius: 100%;
     height: 32px;
     width: 32px;
     padding: 3px;
 }
+
 a.btn-icon.btn-icon-sm.bg-google-plus {
     border-radius: 100%;
     height: 32px;
     width: 32px;
     padding: 3px;
 }
+
 p.text-center.pss {
     font-weight: 400;
 }
+
 p.text-center.text-muted.text-small {
     font-weight: 400;
 }
+
 span.glyphicon {
     /* color: #FF6427; */
 }
+
 select:-internal-list-box option:checked {
     background-color: #FF6427!important;
     color: #fff !important;
 }
+
 .sortcolor {
     background-color: transparent;
     border: 0px;
     color: #FF6427;
 }
+
 .adjust {
     width: 23%;
     float: right;
     margin-right: 30px;
 }
+
 .towardsfilter {
     margin-left: 12px;
 }
+
 .adjustout {
     width: 23%;
     float: right;
     margin-right: 200px;
 }
+
 .towardsfilterout {
     margin-left: 100px;
 }
+
 textarea.form-control+textarea.form-control {
     margin-top: 10px;
 }
+
 h4.labeler {
     display: block;
     max-width: 100%;
@@ -453,11 +544,13 @@ h4.labeler {
     font-size: 14px;
     color: #444;
 }
+
 .form-control {
     border: 0px;
     box-shadow: none;
     border: 1px solid #999999;
 }
+
 .form-control:focus {
     border-color: #FF6427;
     outline: 0;
@@ -465,6 +558,25 @@ h4.labeler {
     box-shadow: none;
     border-width: 2px;
 }
+
 .ui-selecter input {
     padding: 10px;
+}
+
+.incenter {
+    width: 50px;
+    height: 50px;
+}
+
+.on-left {
+    width: 200px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.on-leftspace {
+    width: 200px;
+    float: left;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
