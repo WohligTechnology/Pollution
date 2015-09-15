@@ -10,14 +10,12 @@
                     </div>
                     <div class="panel-body">
                         <div class="bot search-box">
-                            <select ng-model="pagedata.city" class="form-control on-left" ng-change="reload(pagedata);">
-                                <option value="Mumbai">Mumbai</option>
-                                <option value="Pune">Pune</option>
+                            <select ng-options="city as city for city in cities" ng-model="pagedata.city" class="form-control on-left" ng-change="reload(pagedata);">
                             </select>
                             <select ng-options="date.value as date.name for date in datejson" ng-model="pagedata.date" class="form-control on-leftspace" ng-change="reload(pagedata);">
                                 <!--                                <option ng-repeat="date in datejson" value="{{date.value}}" selected>{{date.name}}</option>-->
                             </select>
-<!--
+                            <!--
                             <div class="pull-right">
                                 <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:1,limit:pagedata.limit,city:pagedata.city,date:pagedata.date})">
                                     <option value="20" selected>20</option>
@@ -55,7 +53,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-<!--
+                            <!--
                             <nav>
                                 <ul class="pagination">
                                     <li ng-class="page.class" ng-repeat="page in pages"><a ng-click="reload({page:page.pageno,limit:pagedata.limit,city:pagedata.city,date:pagedata.date});">{{page.pageno}}</a>

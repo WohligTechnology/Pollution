@@ -692,6 +692,13 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
     $scope.pagedata.city = 'Mumbai';
     $scope.pagedata.date = $filter('date')(new Date(), 'dd-MM-yyyy');
 
+    NavigationService.getdistinctcities(function (data, status) {
+        $scope.cities = data.sort();
+        setTimeout(function () {
+            $scope.reload($scope.pagedata);
+        }, 1000);
+    });
+
     $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
         console.log($scope.pagedata);
@@ -699,6 +706,7 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
             $scope.pagedata.type = $scope.pagedata.date;
             delete $scope.pagedata.date;
         }
+
         NavigationService.getleaderboards($scope.pagedata, function (data, status) {
             console.log(data);
             if (data.value != false)
@@ -707,8 +715,6 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
                 $scope.leaderboard = [];
         });
     }
-
-    $scope.reload($scope.pagedata);
 
     $scope.opensocailpage = function (uid) {
         console.log(uid);
