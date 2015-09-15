@@ -580,3 +580,13 @@ h4.labeler {
     margin-bottom: 10px;
     margin-left: 10px;
 }
+
+.smallrounded {
+    width: 100px;
+    border-radius: 100%;
+}
+
+.namebig {
+    font-size: x-large;
+    font-weight: 400;
+}

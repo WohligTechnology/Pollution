@@ -17,6 +17,7 @@
                             <select ng-options="date.value as date.name for date in datejson" ng-model="pagedata.date" class="form-control on-leftspace" ng-change="reload(pagedata);">
                                 <!--                                <option ng-repeat="date in datejson" value="{{date.value}}" selected>{{date.name}}</option>-->
                             </select>
+<!--
                             <div class="pull-right">
                                 <select ng-model="pagedata.limit" class="form-control" ng-change="reload({page:1,limit:pagedata.limit,city:pagedata.city,date:pagedata.date})">
                                     <option value="20" selected>20</option>
@@ -24,6 +25,7 @@
                                     <option value="100">100</option>
                                 </select>
                             </div>
+-->
                         </div>
                         <div style="margin-top:10px;">
                             <table class="table table-bordered ">
@@ -36,6 +38,7 @@
                                         <th class="text-center">Total Retweets</th>
                                         <th class="text-center">Total Favourites</th>
                                         <th class="text-center">Total</th>
+                                        <th class="text-center">View Profile</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +50,8 @@
                                         <td class="text-center">{{value.leaderboard.retweet}}</td>
                                         <td class="text-center">{{value.leaderboard.favorite}}</td>
                                         <td class="text-center">{{value.leaderboard.total}}</td>
+                                        <td class="text-center"><a class="btn btn-primary all-btn" ng-click="opensocailpage(value.leaderboard._id);"><i class="fa fa-user"></i></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

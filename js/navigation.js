@@ -230,13 +230,16 @@ var navigationservice = angular.module('navigationservice', [])
             }).success(callback);
         },
         getleaderboards: function (data, callback) {
-                $http({
-                    url: adminurl + 'dailypost/find',
-                    method: 'POST',
-                    data: data
-                }).success(callback);
-            }
-            //Add New Service
+            $http({
+                url: adminurl + 'dailypost/leaderboard',
+                method: 'POST',
+                data: data
+            }).success(callback);
+        },
+        getSingleUser: function (uid, callback) {
+            $http.get(adminurl + 'user/getOneUser?user=' + uid).success(callback);
+        }
 
+        //Add New Service
     }
 })

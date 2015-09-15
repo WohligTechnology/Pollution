@@ -677,7 +677,7 @@ phonecatControllers.controller('editResultCtrl', function ($scope, TemplateServi
         "type": "text"
     }];
 });
-phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog) {
+phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog, $filter, $window) {
     $scope.template = TemplateService;
     $scope.menutitle = NavigationService.makeactive('Leaderboard');
     TemplateService.title = $scope.menutitle;
@@ -690,7 +690,7 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
     $scope.pagedata.page = 1;
     $scope.pagedata.limit = '20';
     $scope.pagedata.city = 'Mumbai';
-    $scope.pagedata.date = '17-09-2015';
+    $scope.pagedata.date = $filter('date')(new Date(), 'dd-MM-yyyy');
 
     $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
@@ -703,12 +703,35 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
             console.log(data);
             if (data.value != false)
                 $scope.leaderboard = data;
+            else
+                $scope.leaderboard = [];
         });
     }
 
     $scope.reload($scope.pagedata);
 
+    $scope.opensocailpage = function (uid) {
+        console.log(uid);
+        NavigationService.getSingleUser(uid, function (data, status) {
+            console.log(data);
+            $scope.userdetails = data;
+            if ($scope.userdetails.provider == "Facebook") {
+                $window.open("https://www.facebook.com/" + $scope.userdetails.fbid, '_new');
+            } else if ($scope.userdetails.provider == "Twitter") {
+                $window.open("https://twitter.com/" + $scope.userdetails.username, '_new');
+            }
+        });
+    }
+
+    //    href = "#/userdetails/{{value.leaderboard._id}}"
+
     $scope.datejson = [{
+        name: "15-09-2015",
+        value: "15-09-2015"
+    }, {
+        name: "16-09-2015",
+        value: "16-09-2015"
+    }, {
         name: "17-09-2015",
         value: "17-09-2015"
     }, {
@@ -751,5 +774,29 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
         name: "10 Days",
         value: "TenDays"
     }];
+
+});
+phonecatControllers.controller('userdetailCtrl', function ($scope, TemplateService, NavigationService, $routeParams, $location, ngDialog, $window) {
+    $scope.template = TemplateService;
+    $scope.menutitle = NavigationService.makeactive('');
+    TemplateService.title = $scope.menutitle;
+    TemplateService.submenu = '';
+    TemplateService.content = 'views/userdetails.html';
+    TemplateService.list = 2;
+    $scope.navigation = NavigationService.getnav();
+    $scope.userdetails = {};
+
+    NavigationService.getSingleUser($routeParams.id, function (data, status) {
+        console.log(data);
+        $scope.userdetails = data;
+    });
+
+    $scope.opensocailpage = function () {
+        if ($scope.userdetails.provider == "Facebook") {
+            $window.open("https://www.facebook.com/" + $scope.userdetails.fbid);
+        } else if ($scope.userdetails.provider == "Twitter") {
+            $window.open("https://twitter.com/" + $scope.userdetails.username);
+        }
+    }
 
 }); //Add New Controller

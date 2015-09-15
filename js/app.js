@@ -62,6 +62,9 @@ firstapp.config(
             }).when('/leaderboard', {
                 templateUrl: 'views/template.html',
                 controller: 'leaderboardCtrl'
+            }).when('/userdetails/:id', {
+                templateUrl: 'views/template.html',
+                controller: 'userdetailCtrl'
             }). //Add New Path
 
         otherwise({
