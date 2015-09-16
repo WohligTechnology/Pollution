@@ -701,6 +701,7 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
 
     $scope.reload = function (pagedata) {
         $scope.pagedata = pagedata;
+        var datetype = $scope.pagedata.date;
         console.log($scope.pagedata);
         if ($scope.pagedata.date == "ThreeDays" || $scope.pagedata.date == "FiveDays" || $scope.pagedata.date == "TenDays") {
             $scope.pagedata.type = $scope.pagedata.date;
@@ -708,6 +709,7 @@ phonecatControllers.controller('leaderboardCtrl', function ($scope, TemplateServ
         }
 
         NavigationService.getleaderboards($scope.pagedata, function (data, status) {
+            $scope.pagedata.date = datetype;
             console.log(data);
             if (data.value != false)
                 $scope.leaderboard = data;
